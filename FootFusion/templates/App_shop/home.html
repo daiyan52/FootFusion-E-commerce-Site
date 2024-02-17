@@ -1,0 +1,150 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'pages/navbar.html' %}
+
+<div class="section black" style="height:120px;">
+    <div class="row container">
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="card {% if msg.tags %}{{ msg.tags }}{% endif %}">
+                    <div class="card-content">
+                         <div class="msg-container">
+                            <div class="card-title">
+                                <p>{{ msg }}</p>
+                            </div>
+                            <div>
+                                <button type="button" class="close-btn btn-floating btn-small waves-effect waves-light red" onclick="showMessage('{{ msg }}')"><i class="material-icons">close</i></button>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+<div class="carousel carousel-slider">
+    <a class="carousel-item" href="#one!"><img class="c-img" src="/media/images/bg2.jpg" alt="img1"></a>
+    <a class="carousel-item" href="#one!"><img class="c-img" src="/media/images/bg1.jpg"></a>
+    <a class="carousel-item" href="#one!"><img  class="c-img" src="/media/images/bg3.jpg"></a>
+    <a class="carousel-item" href="#one!"><img  class="c-img" src="/media/images/ng4.jpg"></a>
+</div>
+
+
+<div class="secton white" style="height:100px;">
+
+</div>
+
+
+
+<script>
+      
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.carousel');
+        var instances = M.Carousel.init(elems, {
+            fullWidth: true,
+            indicators: true,
+            duration: 200
+        });
+
+        // Auto play carousel
+        var autoplay = true;
+        setInterval(function() {
+            if (autoplay) {
+                instances[0].next();
+            }
+        }, 5000); // Change slide every 5 seconds
+    });
+    
+    function showMessage(message) {
+        document.getElementById('message-content').innerText = message;
+        var instance = M.Modal.getInstance(document.getElementById('message-modal'));
+        instance.open();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+    });
+
+    function showMessage(message) {
+        document.getElementById('message-content').innerText = message;
+        var instance = M.Modal.getInstance(document.getElementById('message-modal'));
+        instance.open();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+    });
+</script>
+
+<div class="row">
+    {% for product in object_list %}
+            <div class="col s12 m6 l3">
+                <div class="product">
+                    <div class="card">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src="/media/{{product.mainimage}}">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4">{{product.name}}<i class="material-icons right">more_vert</i></span>
+                            <div class="price">
+                                <span>{{product.price}}</span>
+                                <span><strike>{{product.old_price}}</strike></span>    
+                            
+                            </div>
+                            <p style="margin-top:10px;"><a href="{% url 'App_shop:product_detail' pk=product.pk %}">See Details</a></p>
+                        </div>
+                        <div class="card-reveal" style="opacity:0.9">
+                            <span class="card-title  red-text text-lighten-1">Product Description<i class="material-icons right">close</i></span>
+                            <p>{{product.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+<style>
+
+    .c-img{
+        height: 100%;
+        width: 100%;
+    }
+    img{
+        width: 100%;
+        height: 350px;
+    }
+    body{
+        background: black;
+    }
+    .price{
+        display: flex;
+        flex-wrap : wrap;
+        justify-content: space-between;
+    }
+    .msg-container{
+        display: flex;
+        flex-wrap : wrap;
+        justify-content: space-between;
+    }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.parallax');
+        var instances = M.Parallax.init(elems);
+      });
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        var closeBtns = document.querySelectorAll('.close-btn');
+        closeBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var card = this.closest('.card');
+                card.parentNode.removeChild(card);
+            });
+        });
+    });
+</script>
+{% endblock %}
+

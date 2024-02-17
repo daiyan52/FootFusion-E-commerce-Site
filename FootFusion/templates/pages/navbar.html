@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+    <style>
+        nav {
+            background-color: #007bff; /* Change the background color to your desired color */
+        }
+        nav ul li a:hover {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper">
+        <a href="{% url 'App_shop:home' %}" class="brand-logo"><i>&nbsp;&nbsp;FootFusion</i></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+           
+            {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'App_Order:cart' %}">
+                    <i class="material-icons small">add_shopping_cart</i>
+                </a>
+            </li> 
+            <li>
+                {% comment %} <a href="#" class="dropdown-trigger" data-target="dropdown1">
+                    <i class="material-icons medium">account_circle</i><span>{{request.user.profile.username}}</span><i class="material-icons right">arrow_drop_down</i>
+                </a> {% endcomment %}
+                <a class="dropdown-trigger" data-target="dropdown1">
+                    <i class="material-icons medium">account_circle</i>
+                    {% comment %} <i class="material-icons right">arrow_drop_down</i> {% endcomment %}
+                </a>
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="{% url 'testapp:profile' %}">Profile</a></li>
+                    <li><a href="#!">Order</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{% url 'testapp:logout' %}">Logout</a></li>
+                </ul>
+            </li>
+            {% else %}
+            <li><a href="{% url 'testapp:login' %}">Sign In</a></li>
+            <li><a href="{% url 'testapp:signup' %}">Signup</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="{% url 'testapp:features' %}"><i class="material-icons small">add_shopping_cart</i><span>Cart</span></a></li>
+    {% if user.is_authenticated %}
+    <li>
+        <a href="#" class="dropdown-trigger" data-target="dropdown2">
+            <i class="material-icons medium">account_circle</i>{{request.user.profile.username}}<i class="material-icons right">arrow_drop_down</i>
+        </a>
+        <ul id="dropdown2" class="dropdown-content">
+            <li><a href="{% url 'testapp:profile' %}">Profile</a></li>
+            <li><a href="#!">two</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'testapp:logout' %}">Logout</a></li>
+        </ul>
+    </li>
+    {% else %}
+    <li><a href="{% url 'testapp:login' %}">Sign In</a></li>
+    <li><a href="{% url 'testapp:signup' %}">Signup</a></li>
+    {% endif %}
+</ul>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+        var dropdowns = document.querySelectorAll('.dropdown-trigger');
+        var dropdownInstances = M.Dropdown.init(dropdowns, {
+            hover: true,
+            coverTrigger: false
+        });
+    });
+</script>
+</body>
+</html>

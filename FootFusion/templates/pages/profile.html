@@ -1,0 +1,27 @@
+{% extends 'pages/base.html' %}
+
+
+
+{% block content %}
+{% include 'pages/navbar.html'%}
+<div class="row">
+    <h5 class="center-align">User Profile</h5>
+    <form class="col s12 m6 offset-m3" method="post">
+        <div class="row">
+            <div class="input-field col s12">
+                {{ form.as_p }}
+                {% csrf_token %}
+            </div>
+        </div>
+        <button class="btn waves-effect waves-light btn-full-width" type="submit" name="action">Save</button>
+    </form>
+
+</div>
+<style>
+    label {
+        color: black;
+        font-size: 15px;
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "pages/base.html" %}
+
+{% block content %}
+{% include 'pages/navbar.html' %}
+<div class="container" style="margin-top:50px;">
+    <div class="row">
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image">
+                    <img class="image"  src="/media/{{object.mainimage}}">
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m7 offset-l1">
+            <p>{{ object.preview_text }}</p>
+            <h4 class="teal-text">&#8377;&nbsp;{{ object.price|floatformat:2 }}</h4>
+            <h5 class="red-text">&#8377;&nbsp;<strike>{{ object.old_price|floatformat:2 }}</strike></h5>
+            <br>
+            <a  href="{% url 'App_Order:add' pk=object.pk %}" class="btn waves-effect waves-light blue darken-1 white-text" type="submit" name="action">
+                Add to Cart
+                <i class="material-icons left">add_shopping_cart</i>
+            </a>
+            <h5 class="green-text darken-4">{{ object.description }}</h5>
+        </div>        
+    </div>
+</div>
+
+<style>
+    .image{
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        transition: transform 0.2s ease-in-out;
+    }
+    .image:hover {
+        transform: scale(1.1);
+    }
+</style>
+{% endblock %}

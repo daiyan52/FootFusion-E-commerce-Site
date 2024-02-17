@@ -1,0 +1,54 @@
+{% extends 'pages/base.html'%}
+
+{% block content %}
+{% include 'pages/navbar.html' %}
+{% if carts %}
+<div class="container" style="margin-top:100px;">
+    <div class="row">
+        <div class="col s12">
+            <table class="highlight responsive-table">
+                <thead class="red-text">
+                    <tr>
+                        <th>#</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart in carts %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ cart.item.name }}</td>
+                        <td>
+                            <a>&#8722;&nbsp;&nbsp;&nbsp;</a>
+                            {{ cart.quantity }}
+                            <a>&nbsp;&nbsp;&nbsp;&#43;</a>
+                        </td>
+                        <td>&#8377;&nbsp;{{ cart.get_total }}</td>
+                        <td><a>Remove</a></td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th scope="row">
+                        <td colspan="2">Total</td>
+                        <td >&#8377;&nbsp;{{orders.get_totals | floatformat:2}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container">
+    <h3 class="center-align">Cart is empty</h3>
+</div>
+{% endif %}
+
+<style>
+    td a i {
+        font-size: inherit;
+    }    
+</style>
+{% endblock %}

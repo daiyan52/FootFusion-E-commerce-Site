@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        nav {
+            background-color: #007bff; /* Change the background color to your desired color */
+        }
+
+        nav ul.right li a {
+            font-size: 20px !important;
+            transition: color 0.3s; /* Add transition for smoother hover effect */
+        }
+
+        nav ul.right li a:hover {
+            color: #fff; /* Change text color on hover */
+            background-color: rgba(255, 255, 255, 0.1); /* Add a subtle background color change */
+        }
+
+        nav ul.right li ul.dropdown-content {
+            margin-top: 0; /* Reset margin to align with parent */
+            margin-left: 0; /* Reset margin to align with parent */
+            min-width: 200px; /* Set a minimum width for the dropdown */
+            display: none; /* Hide the dropdown by default */
+            position: absolute;
+            z-index: 1;
+            background-color: #007bff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul.right li ul.dropdown-content li {
+            clear: both; /* Ensure each dropdown item starts on a new line */
+            width: 100%; /* Set the width to fill the parent container */
+        }
+
+        nav ul.right li ul.dropdown-content li a {
+            color: #fff; /* Set text color for dropdown items */
+            padding: 10px 15px; /* Add some padding for better spacing */
+            display: block;
+        }
+
+        nav ul.right li ul.dropdown-content li a:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Add a subtle background color change on hover */
+        }
+
+        /* Adjust the vertical alignment of the cart icon */
+        nav ul.right li a i.Tiny {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper">
+        <a href="{% url 'testapp:home' %}" class="brand-logo"><i>&nbsp;&nbsp;FootFusion</i></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="{% url 'testapp:features' %}"><i class="Tiny material-icons">add_shopping_cart</i><span>Cart</span></a></li>
+            {% if user.is_authenticated %}
+            <li>
+                <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+                 {{request.user.profile.username}}<i class="material-icons right">arrow_drop_down</i>
+                </a>
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="{% url 'testapp:profile' %}">Profile</a></li>
+                    <li><a href="#!">two</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{% url 'testapp:logout' %}">logout</a></li>
+                </ul>
+            </li>
+            {% else %}
+            <li><a href="{% url 'testapp:login' %}">sign in</a></li>
+            <li><a href="{% url 'testapp:signup' %}">signup</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="{% url 'testapp:features' %}"><i class="Tiny material-icons">add_shopping_cart</i><span>Cart</span></a></li>
+    {% if user.is_authenticated %}
+    <li>
+        <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+            <i class="Medium material-icons">account_circle</i>{{request.user.profile.username}}<i class="material-icons right">arrow_drop_down</i>
+        </a>
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="{% url 'testapp:profile' %}">Profile</a></li>
+            <li><a href="#!">two</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'testapp:logout' %}">logout</a></li>
+        </ul>
+    </li>
+    {% else %}
+    <li><a href="{% url 'testapp:login' %}">sign in</a></li>
+    <li><a href="{% url 'testapp:signup' %}">signup</a></li>
+    {% endif %}
+</ul>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+    });
+    $(document).ready(function(){
+        $('.dropdown-trigger').dropdown();
+    });
+</script>
+</body>
+</html>
