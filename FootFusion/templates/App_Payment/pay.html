@@ -1,0 +1,43 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+{% include 'pages/navbar.html' %}
+{% include 'pages/msg.html' %}
+<div class="container">
+    <div class="row">
+        <div class="col s12 center-align">
+            <h4 class="green-text">Complete Your Purchase</h4>
+            <br>
+            <button class="waves-effect blue waves-light btn" id="rzp-button">Pay Now</button>
+        </div>
+    </div>
+</div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        "key": "{{ razorpay_key }}",
+        "amount": "{{ amount }}",
+        "currency": "INR",
+        "name": "FootFusion",
+        "description": "Purchase Description",
+        "image": "/media/images/logo.png",
+        "order_id": "{{ razorpay_order_id }}",
+        "handler": function (response){
+            // Handle payment success
+            window.location.href = "/App_Payment/success";
+        },
+        "prefill": {
+            "name": "John Doe",
+            "email": "john.doe@example.com"
+        },
+        "theme": {
+            "color": "#F37254"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+    }
+</script>
+{% endblock %}

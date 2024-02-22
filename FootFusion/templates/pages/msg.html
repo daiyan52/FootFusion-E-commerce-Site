@@ -1,0 +1,37 @@
+{% extends 'pages/base.html' %}
+{% block content %}
+<div class="section white" style="height:120px;">
+    <div class="row container">
+        {% if messages %}
+            {% for msg in messages %}
+                <div id="msg-{{ forloop.counter }}" class="card {% if msg.tags %}{{ msg.tags }}{% endif %}">
+                    <div class="card-content">
+                         <div class="msg-container">
+                            <div class="card-title">
+                                <p>{{ msg }}</p>
+                            </div>
+                            <div>
+                                <button type="button" class="close-btn btn-floating btn-small waves-effect waves-light red" onclick="hideMessage('{{ forloop.counter }}')"><i class="material-icons">close</i></button>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<script>
+    function hideMessage(id) {
+        var message = document.getElementById('msg-' + id);
+        message.style.display = 'none';
+    }
+</script>
+
+<style>
+    .msg-container{
+        display: flex;
+        flex-wrap : wrap;
+        justify-content: space-between;
+    }
+</style>
+{% endblock %}

@@ -24,22 +24,20 @@
     </div>
 </div>
 
-<div class="carousel carousel-slider">
-    <a class="carousel-item" href="#one!"><img class="c-img" src="/media/images/bg2.jpg" alt="img1"></a>
-    <a class="carousel-item" href="#one!"><img class="c-img" src="/media/images/bg1.jpg"></a>
-    <a class="carousel-item" href="#one!"><img  class="c-img" src="/media/images/bg3.jpg"></a>
-    <a class="carousel-item" href="#one!"><img  class="c-img" src="/media/images/ng4.jpg"></a>
+<div class="carousel carousel-slider" style="height:500px;">
+    <a class="carousel-item" href="#one!">
+        <img class="c-img" src="/media/images/model1.jpg">
+    </a>
+    <a class="carousel-item" href="#one!">
+        <img class="c-img" src="/media/images/model2.jpg">
+    </a>
+    <a class="carousel-item" href="#one!">
+        <img  class="c-img" src="/media/images/model3.jpg">
+    </a>
 </div>
-
-
-<div class="secton white" style="height:100px;">
-
-</div>
-
 
 
 <script>
-      
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.carousel');
         var instances = M.Carousel.init(elems, {
@@ -91,11 +89,16 @@
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4">{{product.name}}<i class="material-icons right">more_vert</i></span>
                             <div class="price">
-                                <span>{{product.price}}</span>
-                                <span><strike>{{product.old_price}}</strike></span>    
+                                <span class="green-text">{{product.price}}</span>
+                                <span class="red-text"><strike>{{product.old_price}}</strike></span>    
                             
                             </div>
+                            {% if user.is_authenticated %}
                             <p style="margin-top:10px;"><a href="{% url 'App_shop:product_detail' pk=product.pk %}">See Details</a></p>
+                            {% else %}
+                            <p style="margin-top:10px;"><a href="{% url 'testapp:login' %}">See Details</a></p>
+                            {% endif %}
+
                         </div>
                         <div class="card-reveal" style="opacity:0.9">
                             <span class="card-title  red-text text-lighten-1">Product Description<i class="material-icons right">close</i></span>
@@ -106,12 +109,98 @@
             </div>
         {% endfor %}
     </div>
-<style>
+    <div class="section yellow" style="height:200px;">
+        <div class="row">
+            <div class="col s12 m2 offset-m1">
+                <div class="logo">
+                    <img class="d-img" src="/media/images/logo.png">
+                </div>
+            </div>
+            <div class="col s12 m9 yellow center-align" style="margin-top:40px;">
+                <div class="center-align">
+                    <h5>JOIN <span class="green-text">FootFusion</span> AND GET 15% OFF</h5>
+                    <a class="btn waves-effect black waves-light" href="{% url 'testapp:signup'%}" type="submit" name="action">Sign Up
+                        <i class="material-icons right">arrow_forward</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <footer class="page-footer grey darken-4">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h5 class="teal-text">Company Info & Policies</h5>
+              <p class="grey-text text-lighten-4"><a href="terms.html" class="grey-text text-lighten-4">Terms & Conditions</a></p>
+              <p class="grey-text text-lighten-4"><a href="privacy.html" class="grey-text text-lighten-4">Privacy & Cookies Policy</a></p>
+              <p class="grey-text text-lighten-4"><a href="faqs.html" class="grey-text text-lighten-4">FAQ's</a></p>
+              <p class="grey-text text-lighten-4"><a href="return_policy.html" class="grey-text text-lighten-4">Return & Claim Policy</a></p>
+              <p class="grey-text text-lighten-4"><a href="contact.html" class="grey-text text-lighten-4">Contact Us</a></p>
+              <p class="grey-text text-lighten-4"><a href="return_exchange.html" class="grey-text text-lighten-4">Return/Exchange</a></p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+              <h5 class="teal-text">Follow Us!</h5>
+              <ul class="social">
+                <li>
+                    <a class="grey-text text-lighten-3" href="#!">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </li>
+                <li>
+                    <a class="grey-text text-lighten-3" href="#!">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a class="grey-text text-lighten-3" href="#!">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright blue-grey darken-4">
+          <div class="container">
+            <li class="light-blue-text">&copy;&nbsp;FootFusion&nbsp;2024</li>
+            <li class="light-blue-text">All rights reserved</li>
+          </div>
+        </div>
+      </footer>
 
+<style>
+    .social li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    .logo {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      
+      .logo img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      
     .c-img{
         height: 100%;
         width: 100%;
     }
+    .d-img{
+        background color: white;
+        height: 100px;
+        overflow : hidden;
+        margin-top : 20px;
+        mix-blend-mode: darken;
+     }
+    .card-image{
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+    
     img{
         width: 100%;
         height: 350px;

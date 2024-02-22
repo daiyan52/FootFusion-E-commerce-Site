@@ -22,12 +22,15 @@
                         <td>{{ forloop.counter }}</td>
                         <td>{{ cart.item.name }}</td>
                         <td>
-                            <a>&#8722;&nbsp;&nbsp;&nbsp;</a>
+                            <a href="{% url 'App_Order:decrease' pk=cart.item.pk %}">&#8722;&nbsp;&nbsp;&nbsp;</a>
                             {{ cart.quantity }}
-                            <a>&nbsp;&nbsp;&nbsp;&#43;</a>
+                            <a href="{% url 'App_Order:increase' pk=cart.item.pk %}">&nbsp;&nbsp;&nbsp;&#43;</a>
                         </td>
                         <td>&#8377;&nbsp;{{ cart.get_total }}</td>
-                        <td><a>Remove</a></td>
+                        <td>
+                            <a href="{% url 'App_Order:remove' pk=cart.item.pk %}" class="waves-effect red  btn-small">Remove</a>
+                        </td>
+                        
                     </tr>
                     {% endfor %}
                     <tr>
@@ -39,11 +42,18 @@
             </table>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col s12 offset-m8">
+            <a href="{% url 'App_Payment:payment' %}" class="waves-effect yellow darken-4  btn-small" style="width:150px;">Proceed to Buy</a>
+        </div>
+    </div>
 </div>
 {% else %}
 <div class="container">
     <h3 class="center-align">Cart is empty</h3>
 </div>
+
 {% endif %}
 
 <style>

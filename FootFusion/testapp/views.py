@@ -51,7 +51,7 @@ def login_view(request):
         form = AuthenticationForm()
 
     return render(request, 'pages/login.html', {'form': form})
-
+@login_required
 def logout_view(request):
     logout(request)
     messages.warning(request, 'You are logged out')

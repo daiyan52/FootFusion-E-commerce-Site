@@ -1,0 +1,33 @@
+{% extends 'pages/base.html' %}
+{% block content %}
+{% include 'pages/navbar.html' %}
+{% include 'pages/msg.html'%}
+<div class="container" style="margin-top:10px;">
+    <div class="row">
+        <h5>Billing Address</h5>
+        <form class="col s12 m6" method="post">
+            {{form.as_p}}
+            {% csrf_token %}
+            <button class="btn waves-effect blue waves-light"  name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+        <div class="col s12 m5 offset-l1" style="margin-top: 50px;">
+            <ul class="collection">
+                {% for order_item in order_items%}
+                <li class="collection-item">{{order_item.item.name}} x {{order_item.quantity}}</li>
+                {% endfor %}
+                <li class="collection-item active">&#x20B9;&nbsp;{{order_total|floatformat:2}}</li>
+            </ul>
+            <div>
+                {% if saved_address.is_fully_filled %}
+                <a class="btn waves-effect blue waves-light" href="{% url 'App_Payment:pay' %}" type="submit" name="action">Make Payment</a>
+                {% else %}
+                <p class="red-text">Please ensure all information is filled out to proceed with the payment</p>
+                {% endif %}
+             </div> 
+        </div>
+    </div>
+</div>
+
+{% endblock %}

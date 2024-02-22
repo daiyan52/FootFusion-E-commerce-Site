@@ -18,6 +18,14 @@ TEMPLATE_DIR = BASE_DIR/'templates'
 STATIC_DIR = BASE_DIR/'static'
 MEDIA_DIR = BASE_DIR/'media'
 
+
+
+# Razorpay API keys
+
+RAZORPAY_API_KEY = 'rzp_test_9cA0W6k5KMMmVn'
+
+RAZORPAY_API_SECRET = 'DYSutHmGJLCPm8LsXoQacCBF'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -41,8 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'testapp',
     'App_shop',
-    'user_agent',
     'App_Order',
+    'App_Payment',
 ]
 
 #custom user model
@@ -147,8 +155,10 @@ MEDIA_URL = '/media/'
 LOGIN_URL = '/'
 
 
+ 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

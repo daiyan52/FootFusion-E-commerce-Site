@@ -26,6 +26,7 @@ urlpatterns = [
     path('accounts/',include('testapp.urls')),
     path('App_shop/',include('App_shop.urls')),
     path('App_Order/',include('App_Order.urls')),
+    path('App_Payment/',include('App_Payment.urls')),
 ]
 
 

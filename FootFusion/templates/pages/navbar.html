@@ -10,16 +10,13 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
     <style>
-        nav {
-            background-color: #007bff; /* Change the background color to your desired color */
-        }
         nav ul li a:hover {
             opacity: 0;
         }
     </style>
 </head>
 <body>
-<nav>
+<nav class="blue">
     <div class="nav-wrapper">
         <a href="{% url 'App_shop:home' %}" class="brand-logo"><i>&nbsp;&nbsp;FootFusion</i></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
