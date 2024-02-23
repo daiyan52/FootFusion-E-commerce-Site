@@ -38,7 +38,7 @@
                 </a>
                 <ul id="dropdown1" class="dropdown-content">
                     <li><a href="{% url 'testapp:profile' %}">Profile</a></li>
-                    <li><a href="#!">Order</a></li>
+                    <li><a href="{% url 'App_Payment:order' %}">Order</a></li>
                     <li class="divider"></li>
                     <li><a href="{% url 'testapp:logout' %}">Logout</a></li>
                 </ul>
@@ -59,7 +59,7 @@
         </a>
         <ul id="dropdown2" class="dropdown-content">
             <li><a href="{% url 'testapp:profile' %}">Profile</a></li>
-            <li><a href="#!">two</a></li>
+            <li><a href="{% url 'App_Payment:order' %}">Order</a></li>
             <li class="divider"></li>
             <li><a href="{% url 'testapp:logout' %}">Logout</a></li>
         </ul>

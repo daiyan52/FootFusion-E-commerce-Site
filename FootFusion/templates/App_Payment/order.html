@@ -1,0 +1,16 @@
+{% extends 'pages/base.html' %}
+{% block content %}
+{% include 'pages/msg.html' %}
+{% comment %} <h1>Hello</h1> {% endcomment %}
+<div class="container" style="margin-top:120px;">
+    <div class="row s12">
+        {% for order in orders %}
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{order.order_id}}</td>
+        <td>
+            {% for item in order.orderitems.all %}{{item}}<br>{% endfor %}
+        </td>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
