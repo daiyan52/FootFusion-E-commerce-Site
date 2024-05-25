@@ -9,6 +9,7 @@ Provide step-by-step instructions on how to set up the project locally.
 
 2. Change into the project directory:
     ```bash
+    cd  FootFusion-E-commerce-Site
     cd  FootFusion
     ```
 
